@@ -11,7 +11,7 @@
 		8F79558829ACBE0B009ED9B4 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F79558729ACBE0B009ED9B4 /* TimerViewController.swift */; };
 		8F79558D29ACBE0D009ED9B4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8F79558C29ACBE0D009ED9B4 /* Assets.xcassets */; };
 		8F79559029ACBE0D009ED9B4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F79558E29ACBE0D009ED9B4 /* LaunchScreen.storyboard */; };
-		8F79559929ACBE37009ED9B4 /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F79559829ACBE37009ED9B4 /* CircularProgressView.swift */; };
+		8F79559B29AD36D4009ED9B4 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F79559A29AD36D4009ED9B4 /* TimerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,7 +21,7 @@
 		8F79558C29ACBE0D009ED9B4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8F79558F29ACBE0D009ED9B4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8F79559129ACBE0D009ED9B4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8F79559829ACBE37009ED9B4 /* CircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
+		8F79559A29AD36D4009ED9B4 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,8 +66,8 @@
 		8F79559729ACBE15009ED9B4 /* Timer */ = {
 			isa = PBXGroup;
 			children = (
-				8F79559829ACBE37009ED9B4 /* CircularProgressView.swift */,
 				8F79558729ACBE0B009ED9B4 /* TimerViewController.swift */,
+				8F79559A29AD36D4009ED9B4 /* TimerView.swift */,
 			);
 			path = Timer;
 			sourceTree = "<group>";
@@ -142,9 +142,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8F79559B29AD36D4009ED9B4 /* TimerView.swift in Sources */,
 				8F79558829ACBE0B009ED9B4 /* TimerViewController.swift in Sources */,
 				8F79558429ACBE0B009ED9B4 /* AppDelegate.swift in Sources */,
-				8F79559929ACBE37009ED9B4 /* CircularProgressView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
