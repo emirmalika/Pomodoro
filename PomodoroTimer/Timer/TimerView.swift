@@ -9,13 +9,12 @@ import UIKit
 
 class TimerView: UIView {
     
-    let titleLabel = UILabel()
     let timerLabel = UILabel()
     let progressView = UIProgressView()
-    let playButton = UIButton()
-    let stopButton = UIButton()
-    let restartButton = UIButton()
-    let newTaskButton = UIButton()
+//    let playButton = UIButton()
+//    let stopButton = UIButton()
+//    let restartButton = UIButton()
+//    let newTaskButton = UIButton()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -32,19 +31,48 @@ class TimerView: UIView {
 extension TimerView {
     private func style() {
         [
-         titleLabel,
          timerLabel,
-         progressView,
-         playButton,
-         stopButton,
-         restartButton,
-         newTaskButton].forEach {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-        }
+         progressView].forEach {
+             $0.translatesAutoresizingMaskIntoConstraints = false
+         }
+//         playButton,
+//         stopButton,
+//         restartButton,
+//         newTaskButton].
+//            $0.translatesAutoresizingMaskIntoConstraints = false
+        
+
+        timerLabel.backgroundColor = .quaternaryLabel
+        timerLabel.text = "25:00"
+        timerLabel.textAlignment = .center
+        timerLabel.textColor = .white
+        timerLabel.font = UIFont(name: "Damascus", size: 80)
+        timerLabel.layer.masksToBounds = true
+        timerLabel.layer.cornerRadius = 20
+       
+        progressView.translatesAutoresizingMaskIntoConstraints = false
+        progressView.progressViewStyle = .bar
+        progressView.trackTintColor = .systemGray
+        progressView.progressTintColor = .white
+        progressView.progress = 0.5
     }
     
     private func layout() {
-       
+        addSubview(timerLabel)
+        addSubview(progressView)
+        
+        NSLayoutConstraint.activate([
+            timerLabel.topAnchor.constraint(equalTo: topAnchor),
+            timerLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
+            timerLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
+            timerLabel.bottomAnchor.constraint(equalTo: bottomAnchor)
+        ])
+        
+        NSLayoutConstraint.activate([
+            progressView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            progressView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            progressView.bottomAnchor.constraint(equalTo: timerLabel.topAnchor, constant: 250)
+        ])
     }
 }
                                    

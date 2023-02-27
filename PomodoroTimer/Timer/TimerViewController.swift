@@ -10,6 +10,8 @@ import UIKit
 class TimerViewController: UIViewController {
     
     let segmentedControl = UISegmentedControl(items: ["Work", "Short break", "Long break"])
+    let label = UILabel()
+    let timerView = TimerView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,15 +33,37 @@ extension TimerViewController {
         segmentedControl.layer.borderColor = UIColor.white.cgColor
         segmentedControl.tintColor = UIColor.white
         segmentedControl.addTarget(self, action: #selector(segmentedControlValueChanged(_:)), for: .valueChanged)
+        
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Time to focus!"
+        label.textAlignment = .center
+        
+        timerView.translatesAutoresizingMaskIntoConstraints = false
     }
     
     private func layout() {
         view.addSubview(segmentedControl)
+        view.addSubview(label)
+        view.addSubview(timerView)
 
         NSLayoutConstraint.activate([
-            segmentedControl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
-            segmentedControl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            segmentedControl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
+            segmentedControl.topAnchor.constraint(equalToSystemSpacingBelow: view.safeAreaLayoutGuide.topAnchor, multiplier: 2),
+            segmentedControl.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 2),
+            view.trailingAnchor.constraint(equalToSystemSpacingAfter: segmentedControl.trailingAnchor, multiplier: 2)
+        ])
+        
+        NSLayoutConstraint.activate([
+            label.topAnchor.constraint(equalToSystemSpacingBelow: segmentedControl.bottomAnchor, multiplier: 4),
+            label.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 4),
+            view.trailingAnchor.constraint(equalToSystemSpacingAfter: label.trailingAnchor, multiplier: 4)
+        ])
+        
+        NSLayoutConstraint.activate([
+            timerView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            timerView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            timerView.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 1),
+            view.trailingAnchor.constraint(equalToSystemSpacingAfter: timerView.trailingAnchor, multiplier: 1),
+            timerView.heightAnchor.constraint(equalToConstant: 300)
         ])
     }
 }
