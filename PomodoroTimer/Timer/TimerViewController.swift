@@ -13,8 +13,12 @@ class TimerViewController: UIViewController {
     let label = UILabel()
     let timerView = TimerView()
     let playButton = UIButton(type: .system)
-    let addTaskButton = UIButton(type: .system)
-
+    
+    var timer = Timer()
+    var timerStarted = false
+    var time = 1500
+    var secondsPassed = 0
+  
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -44,15 +48,6 @@ extension TimerViewController {
         
         timerView.translatesAutoresizingMaskIntoConstraints = false
         
-        addTaskButton.translatesAutoresizingMaskIntoConstraints = false
-        addTaskButton.setImage(UIImage(systemName: "plus.circle"), for: .normal)
-        addTaskButton.setTitle(" Add new task", for: .normal)
-        addTaskButton.titleLabel?.font = UIFont.systemFont(ofSize: 15)
-        addTaskButton.backgroundColor = .quaternaryLabel
-        addTaskButton.setTitleColor(.white, for: .normal)
-        addTaskButton.layer.masksToBounds = true
-        addTaskButton.layer.cornerRadius = 10
-        
         playButton.translatesAutoresizingMaskIntoConstraints = false
         playButton.setTitle("START", for: .normal)
         playButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
@@ -60,6 +55,7 @@ extension TimerViewController {
         playButton.backgroundColor = .white
         playButton.layer.masksToBounds = true
         playButton.layer.cornerRadius = 10
+        playButton.addTarget(self, action: #selector(startTimer), for: .touchUpInside)
     }
     
     private func layout() {
@@ -67,7 +63,6 @@ extension TimerViewController {
         view.addSubview(label)
         view.addSubview(timerView)
         view.addSubview(playButton)
-//        view.addSubview(addTaskButton)
 
         NSLayoutConstraint.activate([
             segmentedControl.topAnchor.constraint(equalToSystemSpacingBelow: view.safeAreaLayoutGuide.topAnchor, multiplier: 2),
@@ -103,10 +98,37 @@ extension TimerViewController {
         switch sender.selectedSegmentIndex {
         case 0:
             view.backgroundColor = UIColor((#colorLiteral(red: 0.9607843137, green: 0.3137254902, blue: 0.3137254902, alpha: 1)))
+            
         case 1:
             view.backgroundColor = UIColor((#colorLiteral(red: 0.7137254902, green: 0.8862745098, blue: 0.631372549, alpha: 1)))
         default:
             view.backgroundColor = UIColor((#colorLiteral(red: 0.5254901961, green: 0.6392156863, blue: 0.7215686275, alpha: 1)))
         }
+    }
+}
+
+extension TimerViewController {
+    @objc private func startTimer() {
+        timer.invalidate()
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
+        playButton.setTitle("STOP", for: .normal)
+    }
+    
+    @objc func updateTimer() {
+        if secondsPassed < time {
+            time -= 1
+            timerView.timerLabel.text = formatTime()
+            secondsPassed += 1
+            timerView.progressView.progress = Float(secondsPassed)/Float(time)
+        } else {
+            timer.invalidate()
+        }
+
+    }
+    
+    func formatTime() -> String {
+        let minutes = Int(time) / 60 % 60
+        let seconds = Int(time) % 60
+        return String(format: "%02i:%02i", minutes, seconds)
     }
 }

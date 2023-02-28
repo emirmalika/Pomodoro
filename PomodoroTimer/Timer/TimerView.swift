@@ -43,7 +43,7 @@ extension TimerView {
         progressView.progressViewStyle = .bar
         progressView.trackTintColor = .systemGray
         progressView.progressTintColor = .white
-        progressView.progress = 0.5
+        progressView.progress = 0.0
     
     }
     
@@ -55,7 +55,8 @@ extension TimerView {
             timerLabel.topAnchor.constraint(equalTo: topAnchor),
             timerLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
             timerLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
-            timerLabel.bottomAnchor.constraint(equalTo: bottomAnchor)
+            timerLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
+            timerLabel.widthAnchor.constraint(equalToConstant: 150)
         ])
         
         NSLayoutConstraint.activate([
