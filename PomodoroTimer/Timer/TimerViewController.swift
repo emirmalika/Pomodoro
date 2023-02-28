@@ -12,6 +12,8 @@ class TimerViewController: UIViewController {
     let segmentedControl = UISegmentedControl(items: ["Work", "Short break", "Long break"])
     let label = UILabel()
     let timerView = TimerView()
+    let playButton = UIButton(type: .system)
+    let addTaskButton = UIButton(type: .system)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,14 +39,35 @@ extension TimerViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Time to focus!"
         label.textAlignment = .center
+        label.textColor = .white
+        label.font = UIFont.systemFont(ofSize: 25)
         
         timerView.translatesAutoresizingMaskIntoConstraints = false
+        
+        addTaskButton.translatesAutoresizingMaskIntoConstraints = false
+        addTaskButton.setImage(UIImage(systemName: "plus.circle"), for: .normal)
+        addTaskButton.setTitle(" Add new task", for: .normal)
+        addTaskButton.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+        addTaskButton.backgroundColor = .quaternaryLabel
+        addTaskButton.setTitleColor(.white, for: .normal)
+        addTaskButton.layer.masksToBounds = true
+        addTaskButton.layer.cornerRadius = 10
+        
+        playButton.translatesAutoresizingMaskIntoConstraints = false
+        playButton.setTitle("START", for: .normal)
+        playButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+        playButton.setTitleColor(UIColor((#colorLiteral(red: 0.9607843137, green: 0.3137254902, blue: 0.3137254902, alpha: 1))), for: .normal)
+        playButton.backgroundColor = .white
+        playButton.layer.masksToBounds = true
+        playButton.layer.cornerRadius = 10
     }
     
     private func layout() {
         view.addSubview(segmentedControl)
         view.addSubview(label)
         view.addSubview(timerView)
+        view.addSubview(playButton)
+//        view.addSubview(addTaskButton)
 
         NSLayoutConstraint.activate([
             segmentedControl.topAnchor.constraint(equalToSystemSpacingBelow: view.safeAreaLayoutGuide.topAnchor, multiplier: 2),
@@ -53,17 +76,24 @@ extension TimerViewController {
         ])
         
         NSLayoutConstraint.activate([
-            label.topAnchor.constraint(equalToSystemSpacingBelow: segmentedControl.bottomAnchor, multiplier: 4),
             label.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 4),
-            view.trailingAnchor.constraint(equalToSystemSpacingAfter: label.trailingAnchor, multiplier: 4)
+            view.trailingAnchor.constraint(equalToSystemSpacingAfter: label.trailingAnchor, multiplier: 4),
+            label.bottomAnchor.constraint(equalTo: timerView.topAnchor, constant: -32)
         ])
-        
+
         NSLayoutConstraint.activate([
             timerView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             timerView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            timerView.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 1),
-            view.trailingAnchor.constraint(equalToSystemSpacingAfter: timerView.trailingAnchor, multiplier: 1),
+            timerView.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 2),
+            view.trailingAnchor.constraint(equalToSystemSpacingAfter: timerView.trailingAnchor, multiplier: 2),
             timerView.heightAnchor.constraint(equalToConstant: 300)
+        ])
+        
+        NSLayoutConstraint.activate([
+            playButton.topAnchor.constraint(equalToSystemSpacingBelow: timerView.bottomAnchor, multiplier: 4),
+            playButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 80),
+            playButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -80),
+            playButton.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
 }

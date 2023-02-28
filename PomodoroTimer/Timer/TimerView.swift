@@ -11,11 +11,7 @@ class TimerView: UIView {
     
     let timerLabel = UILabel()
     let progressView = UIProgressView()
-//    let playButton = UIButton()
-//    let stopButton = UIButton()
-//    let restartButton = UIButton()
-//    let newTaskButton = UIButton()
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -35,26 +31,20 @@ extension TimerView {
          progressView].forEach {
              $0.translatesAutoresizingMaskIntoConstraints = false
          }
-//         playButton,
-//         stopButton,
-//         restartButton,
-//         newTaskButton].
-//            $0.translatesAutoresizingMaskIntoConstraints = false
-        
 
         timerLabel.backgroundColor = .quaternaryLabel
         timerLabel.text = "25:00"
         timerLabel.textAlignment = .center
         timerLabel.textColor = .white
-        timerLabel.font = UIFont(name: "Damascus", size: 80)
+        timerLabel.font = UIFont.boldSystemFont(ofSize: 80)
         timerLabel.layer.masksToBounds = true
         timerLabel.layer.cornerRadius = 20
        
-        progressView.translatesAutoresizingMaskIntoConstraints = false
         progressView.progressViewStyle = .bar
         progressView.trackTintColor = .systemGray
         progressView.progressTintColor = .white
         progressView.progress = 0.5
+    
     }
     
     private func layout() {
@@ -71,7 +61,7 @@ extension TimerView {
         NSLayoutConstraint.activate([
             progressView.leadingAnchor.constraint(equalTo: leadingAnchor),
             progressView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            progressView.bottomAnchor.constraint(equalTo: timerLabel.topAnchor, constant: 250)
+            progressView.bottomAnchor.constraint(equalTo: timerLabel.topAnchor, constant: 200)
         ])
     }
 }
