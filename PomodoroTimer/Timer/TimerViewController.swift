@@ -13,11 +13,14 @@ class TimerViewController: UIViewController {
     let label = UILabel()
     let timerView = TimerView()
     let playButton = UIButton(type: .system)
+    let stopButton = UIButton(type: .system)
     
     var timer = Timer()
     var timerStarted = false
-    var time = 1500
+    let timeArray = [1500, 300, 900]
     var secondsPassed = 0
+    var timeOne = 1500
+    var timeTwo = 1500
   
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,6 +59,15 @@ extension TimerViewController {
         playButton.layer.masksToBounds = true
         playButton.layer.cornerRadius = 10
         playButton.addTarget(self, action: #selector(startTimer), for: .touchUpInside)
+        
+        stopButton.translatesAutoresizingMaskIntoConstraints = false
+        stopButton.setTitle("STOP", for: .normal)
+        stopButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+        stopButton.setTitleColor(UIColor((#colorLiteral(red: 0.9607843137, green: 0.3137254902, blue: 0.3137254902, alpha: 1))), for: .normal)
+        stopButton.backgroundColor = .white
+        stopButton.layer.masksToBounds = true
+        stopButton.layer.cornerRadius = 10
+        stopButton.addTarget(self, action: #selector(stopTimer), for: .touchUpInside)
     }
     
     private func layout() {
@@ -63,6 +75,7 @@ extension TimerViewController {
         view.addSubview(label)
         view.addSubview(timerView)
         view.addSubview(playButton)
+        view.addSubview(stopButton)
 
         NSLayoutConstraint.activate([
             segmentedControl.topAnchor.constraint(equalToSystemSpacingBelow: view.safeAreaLayoutGuide.topAnchor, multiplier: 2),
@@ -90,6 +103,13 @@ extension TimerViewController {
             playButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -80),
             playButton.heightAnchor.constraint(equalToConstant: 50)
         ])
+        
+        NSLayoutConstraint.activate([
+            stopButton.topAnchor.constraint(equalToSystemSpacingBelow: playButton.bottomAnchor, multiplier: 2),
+            stopButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 80),
+            stopButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -80),
+            stopButton.heightAnchor.constraint(equalToConstant: 50)
+        ])
     }
 }
 
@@ -97,38 +117,78 @@ extension TimerViewController {
     @objc func segmentedControlValueChanged(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:
+            timer.invalidate()
             view.backgroundColor = UIColor((#colorLiteral(red: 0.9607843137, green: 0.3137254902, blue: 0.3137254902, alpha: 1)))
-            
+            zeroValueChanged()
+            timeOne = timeArray[0]
+            timeTwo = timeArray[0]
+            secondsPassed = 0
         case 1:
-            view.backgroundColor = UIColor((#colorLiteral(red: 0.7137254902, green: 0.8862745098, blue: 0.631372549, alpha: 1)))
+            timer.invalidate()
+            view.backgroundColor = UIColor((#colorLiteral(red: 0.5764705882, green: 0.6078431373, blue: 0.3843137255, alpha: 1)))
+            firstValueChanged()
+            timeOne = timeArray[1]
+            timeTwo = timeArray[1]
+            secondsPassed = 0
         default:
+            timer.invalidate()
             view.backgroundColor = UIColor((#colorLiteral(red: 0.5254901961, green: 0.6392156863, blue: 0.7215686275, alpha: 1)))
+            secondValueChanged()
+            timeOne = timeArray[2]
+            timeTwo = timeArray[2]
+            secondsPassed = 0
         }
+    }
+    
+    private func zeroValueChanged() {
+        timerView.timerLabel.text = "25:00"
+        label.text = "Time to focus!"
+        playButton.setTitleColor(UIColor((#colorLiteral(red: 0.9607843137, green: 0.3137254902, blue: 0.3137254902, alpha: 1))), for: .normal)
+        stopButton.setTitleColor(UIColor((#colorLiteral(red: 0.9607843137, green: 0.3137254902, blue: 0.3137254902, alpha: 1))), for: .normal)
+        timerView.progressView.progress = 0.0
+    }
+    
+    private func firstValueChanged() {
+        timerView.timerLabel.text = "05:00"
+        label.text = "Time to short relax!"
+        playButton.setTitleColor(UIColor((#colorLiteral(red: 0.5764705882, green: 0.6078431373, blue: 0.3843137255, alpha: 1))), for: .normal)
+        stopButton.setTitleColor(UIColor((#colorLiteral(red: 0.5764705882, green: 0.6078431373, blue: 0.3843137255, alpha: 1))), for: .normal)
+        timerView.progressView.progress = 0.0
+    }
+    
+    private func secondValueChanged() {
+        timerView.timerLabel.text = "15:00"
+        label.text = "Time to long relax!"
+        playButton.setTitleColor(UIColor((#colorLiteral(red: 0.5254901961, green: 0.6392156863, blue: 0.7215686275, alpha: 1))), for: .normal)
+        stopButton.setTitleColor(UIColor((#colorLiteral(red: 0.5254901961, green: 0.6392156863, blue: 0.7215686275, alpha: 1))), for: .normal)
+        timerView.progressView.progress = 0.0
     }
 }
 
 extension TimerViewController {
     @objc private func startTimer() {
         timer.invalidate()
-        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
-        playButton.setTitle("STOP", for: .normal)
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)     
     }
     
     @objc func updateTimer() {
-        if secondsPassed < time {
-            time -= 1
-            timerView.timerLabel.text = formatTime()
-            secondsPassed += 1
-            timerView.progressView.progress = Float(secondsPassed)/Float(time)
-        } else {
+        timeOne -= 1
+        timerView.timerLabel.text = formatTime()
+        secondsPassed += 1
+        timerView.progressView.progress = Float(secondsPassed)/Float(timeTwo)
+        
+        if timeOne == 0 {
             timer.invalidate()
         }
+    }
 
+    func formatTime() -> String {
+        let minutes = Int(timeOne) / 60 % 60
+        let seconds = Int(timeOne) % 60
+        return String(format: "%02i:%02i", minutes, seconds)
     }
     
-    func formatTime() -> String {
-        let minutes = Int(time) / 60 % 60
-        let seconds = Int(time) % 60
-        return String(format: "%02i:%02i", minutes, seconds)
+    @objc func stopTimer() {
+        timer.invalidate()
     }
 }

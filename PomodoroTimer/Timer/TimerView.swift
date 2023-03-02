@@ -60,8 +60,8 @@ extension TimerView {
         ])
         
         NSLayoutConstraint.activate([
-            progressView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            progressView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            progressView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
+            progressView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
             progressView.bottomAnchor.constraint(equalTo: timerLabel.topAnchor, constant: 200)
         ])
     }
