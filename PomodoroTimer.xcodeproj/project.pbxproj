@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8F4886BF29BA20EF00EDCE55 /* alarm_sound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8F4886BE29BA20EF00EDCE55 /* alarm_sound.mp3 */; };
 		8F79558429ACBE0B009ED9B4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F79558329ACBE0B009ED9B4 /* AppDelegate.swift */; };
 		8F79558829ACBE0B009ED9B4 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F79558729ACBE0B009ED9B4 /* TimerViewController.swift */; };
 		8F79558D29ACBE0D009ED9B4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8F79558C29ACBE0D009ED9B4 /* Assets.xcassets */; };
@@ -15,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8F4886BE29BA20EF00EDCE55 /* alarm_sound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = alarm_sound.mp3; sourceTree = "<group>"; };
 		8F79558029ACBE0B009ED9B4 /* PomodoroTimer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PomodoroTimer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F79558329ACBE0B009ED9B4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8F79558729ACBE0B009ED9B4 /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
@@ -35,6 +37,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8F4886BC29BA205C00EDCE55 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				8F79558C29ACBE0D009ED9B4 /* Assets.xcassets */,
+				8F79558E29ACBE0D009ED9B4 /* LaunchScreen.storyboard */,
+				8F79558329ACBE0B009ED9B4 /* AppDelegate.swift */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		8F4886BD29BA209E00EDCE55 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				8F4886BE29BA20EF00EDCE55 /* alarm_sound.mp3 */,
+			);
+			path = Sounds;
+			sourceTree = "<group>";
+		};
 		8F79557729ACBE0B009ED9B4 = {
 			isa = PBXGroup;
 			children = (
@@ -54,11 +74,10 @@
 		8F79558229ACBE0B009ED9B4 /* PomodoroTimer */ = {
 			isa = PBXGroup;
 			children = (
-				8F79559729ACBE15009ED9B4 /* Timer */,
-				8F79558329ACBE0B009ED9B4 /* AppDelegate.swift */,
-				8F79558C29ACBE0D009ED9B4 /* Assets.xcassets */,
-				8F79558E29ACBE0D009ED9B4 /* LaunchScreen.storyboard */,
 				8F79559129ACBE0D009ED9B4 /* Info.plist */,
+				8F79559729ACBE15009ED9B4 /* Timer */,
+				8F4886BC29BA205C00EDCE55 /* Supporting Files */,
+				8F4886BD29BA209E00EDCE55 /* Sounds */,
 			);
 			path = PomodoroTimer;
 			sourceTree = "<group>";
@@ -131,6 +150,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8F79559029ACBE0D009ED9B4 /* LaunchScreen.storyboard in Resources */,
+				8F4886BF29BA20EF00EDCE55 /* alarm_sound.mp3 in Resources */,
 				8F79558D29ACBE0D009ED9B4 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class TimerViewController: UIViewController {
     
@@ -21,6 +22,8 @@ class TimerViewController: UIViewController {
     var secondsPassed = 0
     var timeOne = 1500
     var timeTwo = 1500
+    
+    var player: AVAudioPlayer?
   
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -171,7 +174,7 @@ extension TimerViewController {
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)     
     }
     
-    @objc func updateTimer() {
+    @objc private func updateTimer() {
         timeOne -= 1
         timerView.timerLabel.text = formatTime()
         secondsPassed += 1
@@ -179,16 +182,23 @@ extension TimerViewController {
         
         if timeOne == 0 {
             timer.invalidate()
+            playSound()
         }
     }
 
-    func formatTime() -> String {
+    private func formatTime() -> String {
         let minutes = Int(timeOne) / 60 % 60
         let seconds = Int(timeOne) % 60
         return String(format: "%02i:%02i", minutes, seconds)
     }
     
-    @objc func stopTimer() {
+    private func playSound() {
+        let url = Bundle.main.url(forResource: "alarm_sound", withExtension: "mp3")
+        player = try! AVAudioPlayer(contentsOf: url!)
+        player?.play()
+    }
+    
+    @objc private func stopTimer() {
         timer.invalidate()
     }
 }
